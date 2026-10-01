@@ -1080,55 +1080,48 @@ function actualizarTodo() {
    IMPRESIÓN / PDF
 ========================================================= */
 
-function imprimirReporte() {
-
-    actualizarTodo();
-
-    setTimeout(() => {
+function ejecutarImpresion() {
+    if (window.Android && window.Android.imprimirPDF) {
+        window.Android.imprimirPDF();
+    } else {
         window.print();
+    }
+}
+
+function imprimirReporte() {
+    actualizarTodo();
+    setTimeout(() => {
+        ejecutarImpresion();
     }, 300);
 }
 
-
 function imprimirSistema1() {
-
     calcularSistema1();
-
     setTimeout(() => {
-        window.print();
+        ejecutarImpresion();
     }, 200);
 }
-
 
 function imprimirSistema2() {
-
     calcularSistema2();
-
     setTimeout(() => {
-        window.print();
+        ejecutarImpresion();
     }, 200);
 }
-
 
 function imprimirSistema3() {
-
     calcularSistema3();
-
     setTimeout(() => {
-        window.print();
+        ejecutarImpresion();
     }, 200);
 }
-
 
 function imprimirSistema4() {
-
     calcularSistema4();
-
     setTimeout(() => {
-        window.print();
+        ejecutarImpresion();
     }, 200);
 }
-
 
 /* =========================================================
    ARRANQUE AUTOMÁTICO
