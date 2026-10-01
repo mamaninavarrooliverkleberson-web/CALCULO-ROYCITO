@@ -1,0 +1,1146 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+<title>CALCULO ROYCITO</title>
+
+<style>
+* {
+    box-sizing: border-box;
+}
+
+body {
+    margin: 0;
+    background: #101418;
+    color: #f2f2f2;
+    font-family: Arial, sans-serif;
+}
+
+.container {
+    width: 100%;
+    max-width: 1400px;
+    margin: auto;
+    padding: 12px;
+}
+
+h1 {
+    text-align: center;
+    font-size: 24px;
+    margin: 10px 0 4px;
+    color: #fff;
+}
+
+.subtitulo {
+    text-align: center;
+    color: #8ea0b5;
+    font-size: 12px;
+    margin-bottom: 15px;
+}
+
+.card {
+    background: #202020;
+    border-radius: 14px;
+    padding: 15px;
+    margin-bottom: 12px;
+    border: 1px solid #333;
+}
+
+.lote {
+    border-color: #3498db;
+}
+
+.s1 {
+    border-color: #2980b9;
+}
+
+.s2 {
+    border-color: #3498db;
+}
+
+.s3 {
+    border-color: #e67e22;
+}
+
+.s4 {
+    border-color: #9b59b6;
+}
+
+h2 {
+    font-size: 17px;
+    margin: 0 0 12px;
+}
+
+h3 {
+    font-size: 14px;
+    color: #8ea0b5;
+}
+
+.grid {
+    display: grid;
+    grid-template-columns: repeat(3, 1fr);
+    gap: 10px;
+}
+
+.campo {
+    display: flex;
+    flex-direction: column;
+}
+
+label {
+    font-size: 12px;
+    color: #bbb;
+    margin-bottom: 4px;
+}
+
+input {
+    width: 100%;
+    padding: 10px;
+    border-radius: 7px;
+    border: 1px solid #555;
+    background: #151515;
+    color: white;
+    font-size: 15px;
+}
+
+input:focus {
+    outline: none;
+    border-color: #3498db;
+}
+
+.botones {
+    display: flex;
+    gap: 8px;
+    margin: 12px 0;
+}
+
+button {
+    flex: 1;
+    padding: 12px;
+    border: 0;
+    border-radius: 8px;
+    color: white;
+    background: #2980b9;
+    font-weight: bold;
+    font-size: 14px;
+    cursor: pointer;
+}
+
+button:hover {
+    opacity: .9;
+}
+
+.actualizar {
+    background: #16a085;
+}
+
+.pdf {
+    background: #34495e;
+}
+
+.resultado {
+    background: #111;
+    border-radius: 8px;
+    padding: 12px;
+    white-space: pre-wrap;
+    font-family: monospace;
+    font-size: 12px;
+    line-height: 1.5;
+    min-height: 150px;
+    overflow-x: auto;
+}
+
+.auto {
+    border: 1px solid #3498db;
+    border-radius: 9px;
+    padding: 10px;
+    margin-bottom: 10px;
+}
+
+.auto.verde {
+    border-color: #2ecc71;
+}
+
+.auto.morado {
+    border-color: #9b59b6;
+}
+
+.valor-grande {
+    font-size: 20px;
+    font-weight: bold;
+    text-align: center;
+    color: #2ecc71;
+}
+
+.total {
+    font-size: 18px;
+    font-weight: bold;
+    text-align: center;
+    color: #f39c12;
+    padding: 8px;
+}
+
+.sistemas {
+    display: grid;
+    grid-template-columns: repeat(4, 1fr);
+    gap: 10px;
+}
+
+.margen-positivo {
+    color: #2ecc71;
+}
+
+.margen-negativo {
+    color: #e74c3c;
+}
+
+@media (max-width: 1000px) {
+    .sistemas {
+        grid-template-columns: repeat(2, 1fr);
+    }
+}
+
+@media (max-width: 650px) {
+
+    .container {
+        padding: 8px;
+    }
+
+    h1 {
+        font-size: 20px;
+    }
+
+    .subtitulo {
+        font-size: 10px;
+    }
+
+    .grid {
+        grid-template-columns: 1fr 1fr;
+    }
+
+    .sistemas {
+        grid-template-columns: 1fr;
+    }
+
+    .botones {
+        flex-direction: column;
+    }
+
+    .card {
+        padding: 12px;
+    }
+
+    input {
+        font-size: 16px;
+        padding: 11px;
+    }
+
+    button {
+        padding: 13px;
+    }
+}
+
+@media (max-width: 400px) {
+    .grid {
+        grid-template-columns: 1fr;
+    }
+}
+
+/* IMPRESIÓN */
+@media print {
+
+    body {
+        background: white;
+        color: black;
+    }
+
+    .container {
+        max-width: 100%;
+    }
+
+    .card {
+        background: white;
+        color: black;
+        border: 1px solid #999;
+        page-break-inside: avoid;
+    }
+
+    .resultado {
+        background: white;
+        color: black;
+        border: 1px solid #999;
+    }
+
+    input {
+        color: black;
+        background: white;
+        border: 1px solid #999;
+    }
+
+    button,
+    .botones {
+        display: none !important;
+    }
+
+    .subtitulo,
+    label,
+    h3 {
+        color: #333;
+    }
+}
+</style>
+</head>
+
+<body>
+
+<div class="container">
+
+<h1>CALCULO ROYCITO</h1>
+
+<div class="subtitulo">
+LIQUIDACIÓN USD • DESCUENTOS USD • CONVERSIÓN USD → S/ • LOGÍSTICA • RENTABILIDAD
+</div>
+
+<!-- =====================================================
+     DATOS CENTRALES
+===================================================== -->
+
+<div class="card lote">
+
+<h2>◈ DATOS CENTRALES</h2>
+
+<div class="grid">
+
+<div class="campo">
+<label>Proveedor</label>
+<input id="proveedor" value="HUMPIRE TOLEDO">
+</div>
+
+<div class="campo">
+<label>Mineral</label>
+<input id="mineral" value="LLAMPO">
+</div>
+
+<div class="campo">
+<label>Fecha</label>
+<input id="fecha" value="31/08/2026">
+</div>
+
+<div class="campo">
+<label>Sacos</label>
+<input id="sacos" type="number" value="109">
+</div>
+
+</div>
+</div>
+
+<div class="botones">
+
+<button class="actualizar" onclick="actualizarTodo()">
+⟳ ACTUALIZAR TODO
+</button>
+
+<button class="pdf" onclick="imprimirReporte()">
+▣ REPORTE / PDF
+</button>
+
+</div>
+
+<!-- =====================================================
+     SISTEMAS
+===================================================== -->
+
+<div class="sistemas">
+
+<!-- =====================================================
+     SISTEMA 1
+===================================================== -->
+
+<div class="card s1">
+
+<h2>● SISTEMA 1</h2>
+
+<h3>LIQUIDACIÓN DEL LOTE • USD</h3>
+
+<div class="grid">
+
+<div class="campo">
+<label>TMH</label>
+<input id="tmh" type="number" step="0.001" value="3.369">
+</div>
+
+<div class="campo">
+<label>% Humedad</label>
+<input id="humedad" type="number" step="0.01" value="11.13">
+</div>
+
+<div class="campo">
+<label>Ley Oz/Tc</label>
+<input id="ley" type="number" step="0.001" value="0.286">
+</div>
+
+<div class="campo">
+<label>% Recuperación</label>
+<input id="recuperacion" type="number" value="90">
+</div>
+
+<div class="campo">
+<label>Precio Inter USD</label>
+<input id="precioInter" type="number" step="0.01" value="4562.75">
+</div>
+
+<div class="campo">
+<label>Maquila USD/TM</label>
+<input id="maquila" type="number" step="0.01" value="100">
+</div>
+
+</div>
+
+<div class="botones">
+
+<button onclick="calcularSistema1()">
+Calcular
+</button>
+
+<button class="pdf" onclick="imprimirSistema1()">
+PDF
+</button>
+
+</div>
+
+<div id="resultado1" class="resultado"></div>
+
+</div>
+
+
+<!-- =====================================================
+     SISTEMA 2
+===================================================== -->
+
+<div class="card s2">
+
+<h2>● SISTEMA 2</h2>
+
+<h3>DESCUENTOS + CONVERSIÓN USD → S/</h3>
+
+<div class="auto">
+
+<b>↻ DATOS HEREDADOS DEL SISTEMA 1</b>
+
+<p>
+TMS:
+<strong id="s2tms">0.000</strong>
+</p>
+
+<p>
+Costo USD/TM:
+<strong id="s2costo">$ 0.0000</strong>
+</p>
+
+<p>
+NBASE USD:
+<strong id="s2nbase">$ 0.00</strong>
+</p>
+
+</div>
+
+<div class="grid">
+
+<div class="campo">
+<label>% Descuento</label>
+<input id="descuento" type="number" step="0.01" value="1">
+</div>
+
+<div class="campo">
+<label>Felte USD/TM</label>
+<input id="felte" type="number" step="0.01" value="30.1">
+</div>
+
+<div class="campo">
+<label>Tipo Cambio S/ por USD</label>
+<input id="tipoCambio" type="number" step="0.0001" value="3.45">
+</div>
+
+</div>
+
+<div class="total">
+
+<div id="totalUSD">
+Total Neto USD: $ 0.00
+</div>
+
+<div id="totalSoles">
+TOTAL NETO S/: S/ 0.00
+</div>
+
+</div>
+
+<div class="botones">
+
+<button onclick="calcularSistema2()">
+Calcular
+</button>
+
+<button class="pdf" onclick="imprimirSistema2()">
+PDF
+</button>
+
+</div>
+
+<div id="resultado2" class="resultado"></div>
+
+</div>
+
+
+<!-- =====================================================
+     SISTEMA 3
+===================================================== -->
+
+<div class="card s3">
+
+<h2>● SISTEMA 3</h2>
+
+<h3>LOGÍSTICA • SOLES</h3>
+
+<div class="auto verde">
+
+<b>↻ INGRESO DISPONIBLE AUTOMÁTICO</b>
+
+<div id="ingresoSoles" class="valor-grande">
+S/ 0.00
+</div>
+
+</div>
+
+<div class="grid">
+
+<div class="campo">
+<label>Sacos del Lote</label>
+<input id="sacosLote" type="number" value="109">
+</div>
+
+<div class="campo">
+<label>Sacos por Camión</label>
+<input id="sacosCamion" type="number" value="475">
+</div>
+
+<div class="campo">
+<label>Flete Total S/</label>
+<input id="fleteTotal" type="number" step="0.01" value="2300">
+</div>
+
+<div class="campo">
+<label>Estiba Rinconada S/</label>
+<input id="rinconada" type="number" step="0.01" value="5">
+</div>
+
+<div class="campo">
+<label>Estiba Juliaca S/</label>
+<input id="juliaca" type="number" step="0.01" value="0.80">
+</div>
+
+</div>
+
+<div class="botones">
+
+<button onclick="calcularSistema3()">
+Calcular
+</button>
+
+<button class="pdf" onclick="imprimirSistema3()">
+PDF
+</button>
+
+</div>
+
+<div id="resultado3" class="resultado"></div>
+
+</div>
+
+
+<!-- =====================================================
+     SISTEMA 4
+===================================================== -->
+
+<div class="card s4">
+
+<h2>● SISTEMA 4</h2>
+
+<h3>RENTABILIDAD • SOLES</h3>
+
+<div class="auto morado">
+
+<b>◉ BALANCE AUTOMÁTICO</b>
+
+<p id="ganIngreso">
+Ingreso Neto S/: S/ 0.00
+</p>
+
+<p id="ganLogistica">
+Logística S/: S/ 0.00
+</p>
+
+<p id="ganInversion">
+Inversión S/: S/ 0.00
+</p>
+
+</div>
+
+<div class="grid">
+
+<div class="campo">
+<label>Sacos Inversión</label>
+<input id="sacosInversion" type="number" value="109">
+</div>
+
+<div class="campo">
+<label>Costo / Saco S/</label>
+<input id="costoSaco" type="number" step="0.01" value="150">
+</div>
+
+</div>
+
+<div class="botones">
+
+<button onclick="calcularSistema4()">
+Calcular
+</button>
+
+<button class="pdf" onclick="imprimirSistema4()">
+PDF
+</button>
+
+</div>
+
+<div id="resultado4" class="resultado"></div>
+
+</div>
+
+</div>
+
+</div>
+
+
+<script>
+
+/* =========================================================
+   UTILIDADES
+========================================================= */
+
+function n(id) {
+    return parseFloat(document.getElementById(id).value) || 0;
+}
+
+function dinero(valor) {
+    return valor.toLocaleString("en-US", {
+        minimumFractionDigits: 2,
+        maximumFractionDigits: 2
+    });
+}
+
+function numero(valor, decimales = 4) {
+    return valor.toLocaleString("en-US", {
+        minimumFractionDigits: decimales,
+        maximumFractionDigits: decimales
+    });
+}
+
+
+/* =========================================================
+   SISTEMA 1
+========================================================= */
+
+function obtenerSistema1() {
+
+    const tmh = n("tmh");
+    const humedad = n("humedad");
+    const ley = n("ley");
+    const recuperacion = n("recuperacion");
+    const precioInter = n("precioInter");
+    const maquila = n("maquila");
+
+    if (tmh < 0)
+        throw new Error("TMH no puede ser negativo.");
+
+    if (humedad < 0 || humedad >= 100)
+        throw new Error("La humedad debe estar entre 0 y 99.99%.");
+
+    if (ley < 0)
+        throw new Error("La ley no puede ser negativa.");
+
+    if (recuperacion < 0 || recuperacion > 100)
+        throw new Error("La recuperación debe estar entre 0 y 100%.");
+
+    if (precioInter < 0)
+        throw new Error("El precio internacional no puede ser negativo.");
+
+    if (maquila < 0)
+        throw new Error("La maquila no puede ser negativa.");
+
+    const tms =
+        tmh * (1 - humedad / 100);
+
+    const factor =
+        (0.04395731 * ley) + 1.04050418;
+
+    const valorBrutoTM =
+        ley *
+        (recuperacion / 100) *
+        precioInter *
+        factor;
+
+    const costoTM =
+        valorBrutoTM - maquila;
+
+    const nbase =
+        costoTM * tms;
+
+    const igv =
+        nbase * 0.18;
+
+    const total =
+        nbase + igv;
+
+    return {
+        tmh,
+        humedad,
+        tms,
+        ley,
+        recuperacion,
+        precioInter,
+        maquila,
+        factor,
+        valorBrutoTM,
+        costoTM,
+        nbase,
+        igv,
+        total
+    };
+}
+
+
+function calcularSistema1() {
+
+    try {
+
+        const d = obtenerSistema1();
+
+        document.getElementById("resultado1").textContent =
+
+`========================================
+       SISTEMA 1: LIQUIDACIÓN USD
+========================================
+Proveedor        : ${document.getElementById("proveedor").value}
+Mineral          : ${document.getElementById("mineral").value}
+Sacos            : ${document.getElementById("sacos").value}
+Fecha            : ${document.getElementById("fecha").value}
+----------------------------------------
+TMH              : ${numero(d.tmh,3)}
+Humedad          : ${numero(d.humedad,2)}%
+TMS              : ${numero(d.tms,3)}
+Ley              : ${numero(d.ley,3)}
+Recuperación     : ${numero(d.recuperacion,2)}%
+Precio Inter USD : $ ${dinero(d.precioInter)}
+Maquila USD/TM   : $ ${dinero(d.maquila)}
+----------------------------------------
+Factor La Joya   : ${d.factor.toFixed(10)}
+Valor Bruto/TM   : $ ${numero(d.valorBrutoTM,4)}
+COSTO USD/TM     : $ ${numero(d.costoTM,4)}
+NBASE USD        : $ ${dinero(d.nbase)}
+IGV 18% USD      : $ ${dinero(d.igv)}
+----------------------------------------
+TOTAL USD        : $ ${dinero(d.total)}
+========================================`;
+
+        actualizarIndicadores2(d);
+
+    } catch(e) {
+
+        alert(e.message);
+
+    }
+}
+
+
+/* =========================================================
+   SISTEMA 2
+========================================================= */
+
+function obtenerSistema2() {
+
+    const d1 = obtenerSistema1();
+
+    const descuento = n("descuento");
+    const felte = n("felte");
+    const tipoCambio = n("tipoCambio");
+
+    if (descuento < 0)
+        throw new Error("El descuento no puede ser negativo.");
+
+    if (felte < 0)
+        throw new Error("El Felte no puede ser negativo.");
+
+    if (tipoCambio <= 0)
+        throw new Error("El tipo de cambio debe ser mayor que cero.");
+
+    const nbaseInicial =
+        d1.tms * d1.costoTM;
+
+    const descuentoUSD =
+        nbaseInicial * descuento / 100;
+
+    const felteTotal =
+        felte * d1.tms;
+
+    const netoUSD =
+        nbaseInicial -
+        descuentoUSD -
+        felteTotal;
+
+    const netoSoles =
+        netoUSD * tipoCambio;
+
+    return {
+        ...d1,
+        nbaseInicial,
+        descuento,
+        descuentoUSD,
+        felte,
+        felteTotal,
+        netoUSD,
+        tipoCambio,
+        netoSoles
+    };
+}
+
+
+function actualizarIndicadores2(d) {
+
+    document.getElementById("s2tms").textContent =
+        numero(d.tms,3) + " TMS";
+
+    document.getElementById("s2costo").textContent =
+        "$ " + numero(d.costoTM,4);
+
+    document.getElementById("s2nbase").textContent =
+        "$ " + dinero(d.nbase);
+}
+
+
+function calcularSistema2() {
+
+    try {
+
+        const d = obtenerSistema2();
+
+        actualizarIndicadores2(d);
+
+        document.getElementById("totalUSD").textContent =
+            "Total Neto USD: $ " + dinero(d.netoUSD);
+
+        document.getElementById("totalSoles").textContent =
+            "TOTAL NETO S/: S/ " + dinero(d.netoSoles);
+
+        document.getElementById("resultado2").textContent =
+
+`========================================
+     SISTEMA 2: DESCUENTOS + CONVERSIÓN
+========================================
+DATOS HEREDADOS DEL SISTEMA 1
+TMS              : ${numero(d.tms,3)}
+Costo USD/TM     : $ ${numero(d.costoTM,4)}
+----------------------------------------
+NBASE Inicial USD: $ ${dinero(d.nbaseInicial)}
+Descuento ${numero(d.descuento,2)}%   : -$ ${dinero(d.descuentoUSD)}
+Felte USD/TM     : $ ${dinero(d.felte)}
+Felte Total      : -$ ${dinero(d.felteTotal)}
+----------------------------------------
+TOTAL NETO USD   : $ ${dinero(d.netoUSD)}
+----------------------------------------
+Tipo Cambio      : ${numero(d.tipoCambio,4)}
+TOTAL NETO SOLES : S/ ${dinero(d.netoSoles)}
+========================================`;
+
+    } catch(e) {
+
+        alert(e.message);
+
+    }
+}
+
+
+/* =========================================================
+   SISTEMA 3
+========================================================= */
+
+function obtenerSistema3() {
+
+    const d2 = obtenerSistema2();
+
+    const sacosLote = parseInt(n("sacosLote"));
+    const sacosCamion = parseInt(n("sacosCamion"));
+    const fleteTotal = n("fleteTotal");
+    const rinconada = n("rinconada");
+    const juliaca = n("juliaca");
+
+    if (sacosLote <= 0)
+        throw new Error("Los sacos del lote deben ser mayores que cero.");
+
+    if (sacosCamion <= 0)
+        throw new Error("Los sacos por camión deben ser mayores que cero.");
+
+    if (fleteTotal < 0)
+        throw new Error("El flete no puede ser negativo.");
+
+    const fleteSaco =
+        fleteTotal / sacosCamion;
+
+    const fleteLote =
+        fleteSaco * sacosLote;
+
+    const totalRinconada =
+        sacosLote * rinconada;
+
+    const totalJuliaca =
+        sacosLote * juliaca;
+
+    const logistica =
+        fleteLote +
+        totalRinconada +
+        totalJuliaca;
+
+    const costoUnitario =
+        fleteSaco +
+        rinconada +
+        juliaca;
+
+    return {
+        ...d2,
+        sacosLote,
+        sacosCamion,
+        fleteTotal,
+        fleteSaco,
+        fleteLote,
+        rinconada,
+        totalRinconada,
+        juliaca,
+        totalJuliaca,
+        logistica,
+        costoUnitario
+    };
+}
+
+
+function calcularSistema3() {
+
+    try {
+
+        const d = obtenerSistema3();
+
+        document.getElementById("ingresoSoles").textContent =
+            "S/ " + dinero(d.netoSoles);
+
+        document.getElementById("resultado3").textContent =
+
+`========================================
+          SISTEMA 3: LOGÍSTICA S/
+========================================
+Ingreso Disponible : S/ ${dinero(d.netoSoles)}
+----------------------------------------
+Sacos Lote         : ${d.sacosLote}
+Sacos Camión       : ${d.sacosCamion}
+Flete Camión       : S/ ${dinero(d.fleteTotal)}
+Flete/Saco         : S/ ${numero(d.fleteSaco,4)}
+Flete Lote         : S/ ${dinero(d.fleteLote)}
+Estiba Rinconada   : S/ ${dinero(d.totalRinconada)}
+Estiba Juliaca     : S/ ${dinero(d.totalJuliaca)}
+----------------------------------------
+GASTO LOGÍSTICO    : S/ ${dinero(d.logistica)}
+COSTO UNITARIO     : S/ ${numero(d.costoUnitario,4)}
+========================================`;
+
+    } catch(e) {
+
+        alert(e.message);
+
+    }
+}
+
+
+/* =========================================================
+   SISTEMA 4
+========================================================= */
+
+function obtenerSistema4() {
+
+    const d3 = obtenerSistema3();
+
+    const sacosInversion =
+        parseInt(n("sacosInversion"));
+
+    const costoSaco =
+        n("costoSaco");
+
+    if (sacosInversion < 0)
+        throw new Error("Los sacos de inversión no pueden ser negativos.");
+
+    if (costoSaco < 0)
+        throw new Error("El costo por saco no puede ser negativo.");
+
+    const inversion =
+        sacosInversion * costoSaco;
+
+    const resultado =
+        d3.netoSoles -
+        d3.logistica -
+        inversion;
+
+    const margen =
+        d3.netoSoles !== 0
+        ? resultado / d3.netoSoles * 100
+        : 0;
+
+    return {
+        ...d3,
+        sacosInversion,
+        costoSaco,
+        inversion,
+        resultado,
+        margen
+    };
+}
+
+
+function calcularSistema4() {
+
+    try {
+
+        const d = obtenerSistema4();
+
+        document.getElementById("ganIngreso").textContent =
+            "Ingreso Neto S/: S/ " + dinero(d.netoSoles);
+
+        document.getElementById("ganLogistica").textContent =
+            "Logística S/: S/ " + dinero(d.logistica);
+
+        document.getElementById("ganInversion").textContent =
+            "Inversión S/: S/ " + dinero(d.inversion);
+
+        document.getElementById("resultado4").textContent =
+
+`========================================
+       SISTEMA 4: RENTABILIDAD S/
+========================================
+Ingreso Neto      : S/ ${dinero(d.netoSoles)}
+Logística         : -S/ ${dinero(d.logistica)}
+Sacos Inversión   : ${d.sacosInversion}
+Costo/Saco        : S/ ${dinero(d.costoSaco)}
+Inversión Total   : -S/ ${dinero(d.inversion)}
+----------------------------------------
+RESULTADO         : S/ ${dinero(d.resultado)}
+MARGEN            : ${numero(d.margen,2)}%
+========================================`;
+
+    } catch(e) {
+
+        alert(e.message);
+
+    }
+}
+
+
+/* =========================================================
+   ACTUALIZAR TODO
+========================================================= */
+
+function actualizarTodo() {
+
+    try {
+
+        calcularSistema1();
+        calcularSistema2();
+        calcularSistema3();
+        calcularSistema4();
+
+        window.scrollTo({
+            top: 0,
+            behavior: "smooth"
+        });
+
+    } catch(e) {
+
+        alert(e.message);
+
+    }
+}
+
+
+/* =========================================================
+   IMPRESIÓN / PDF
+========================================================= */
+
+function imprimirReporte() {
+
+    actualizarTodo();
+
+    setTimeout(() => {
+        window.print();
+    }, 300);
+}
+
+
+function imprimirSistema1() {
+
+    calcularSistema1();
+
+    setTimeout(() => {
+        window.print();
+    }, 200);
+}
+
+
+function imprimirSistema2() {
+
+    calcularSistema2();
+
+    setTimeout(() => {
+        window.print();
+    }, 200);
+}
+
+
+function imprimirSistema3() {
+
+    calcularSistema3();
+
+    setTimeout(() => {
+        window.print();
+    }, 200);
+}
+
+
+function imprimirSistema4() {
+
+    calcularSistema4();
+
+    setTimeout(() => {
+        window.print();
+    }, 200);
+}
+
+
+/* =========================================================
+   ARRANQUE AUTOMÁTICO
+========================================================= */
+
+window.onload = function() {
+
+    actualizarTodo();
+
+};
+
+</script>
+
+</body>
+</html>
